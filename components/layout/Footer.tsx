@@ -12,20 +12,21 @@ const footerLinks = {
   developers: [
     { name: 'Documentation', href: '/docs' },
     { name: 'Quick Start', href: '/docs/quickstart' },
-    { name: 'CLI Reference', href: '/docs/cli' },
-    { name: 'API Reference', href: '/docs/api' },
-    { name: 'Schemas', href: '/docs/schemas' },
+    { name: 'CLI Reference', href: '/docs/api/cli' },
+    { name: 'API Reference', href: '/docs/api/rest' },
+    { name: 'Schemas', href: '/docs/api/schemas' },
   ],
   community: [
+    { name: 'Community', href: '/community' },
     { name: 'GitHub', href: 'https://github.com/sreejagatab/AI-Civ-TestUniverse' },
     { name: 'Issues', href: 'https://github.com/sreejagatab/AI-Civ-TestUniverse/issues' },
     { name: 'Discussions', href: 'https://github.com/sreejagatab/AI-Civ-TestUniverse/discussions' },
-    { name: 'Contributing', href: '/open-source' },
+    { name: 'Contributing', href: '/contributing' },
   ],
   legal: [
     { name: 'Privacy', href: '/privacy' },
     { name: 'Terms', href: '/terms' },
-    { name: 'License', href: 'https://github.com/sreejagatab/AI-Civ-TestUniverse/blob/main/LICENSE' },
+    { name: 'License', href: '/license' },
   ],
 };
 
