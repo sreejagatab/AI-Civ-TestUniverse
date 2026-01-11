@@ -5,7 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  basePath: '/AI-Civ-TestUniverse',
+  assetPrefix: '/AI-Civ-TestUniverse/',
 };
 
 module.exports = nextConfig;
