@@ -1,0 +1,2057 @@
+Build AI-Civ TestUniverse Showcase Website
+
+  Build a complete, production-ready showcase website for AI-Civ TestUniverse in website/ directory.
+
+  Tech Stack:
+  - Framework: Next.js 14 (App Router)
+  - Styling: Tailwind CSS + shadcn/ui components
+  - Animations: Framer Motion
+  - Icons: Lucide React
+  - Code highlighting: Shiki
+  - Diagrams: Mermaid.js (rendered server-side)
+  - Documentation: MDX
+  - Deployment: Static export (works on Vercel, Netlify, GitHub Pages)
+
+  Design System:
+  - Primary color: #3B82F6 (blue-500) - trust, technology
+  - Accent color: #10B981 (emerald-500) - success, confidence
+  - Warning: #F59E0B (amber-500)
+  - Error: #EF4444 (red-500)
+  - Background: #0F172A (slate-900) for dark mode, #FFFFFF for light
+  - Font: Inter for body, JetBrains Mono for code
+  - Dark mode default, with toggle
+
+  ====================
+  PAGE 1: HOME (/)
+  ====================
+
+  Hero Section:
+  ```jsx
+  // Animated headline with typing effect
+  <h1>"Universal Software Testing"</h1>
+  <h2 className="gradient-text">
+    "Evidence. Governance. Confidence."
+  </h2>
+  <p className="text-xl text-slate-400">
+    "AI-powered test orchestration that wraps your favorite tools,
+     eliminates noise, and proves every finding."
+  </p>
+
+  // Three CTA buttons
+  <Button variant="primary">View Architecture →</Button>
+  <Button variant="outline">See Real Results</Button>
+  <Button variant="ghost">Run the Demo</Button>
+
+  // Animated terminal showing real command
+  <Terminal>
+    $ aiciv run https://example.com --pack=webapp-standard
+
+    ✓ Recon complete (47 routes discovered)
+    ✓ Lighthouse: 3 performance findings
+    ✓ Axe: 7 accessibility violations
+    ✓ ZAP: 2 security issues (1 HIGH)
+    ✓ Dedupe: 12 → 9 unique findings
+    ✓ Report generated: report.html
+
+    Quality Gate: PASSED (0 critical, 1 high)
+    Exit code: 0
+  </Terminal>
+
+  Problem Section:
+  <Section title="The Problem with Testing Today">
+    <ProblemCard
+      icon={<Wrench />}
+      title="Tools ≠ Testing"
+      description="You have 15 tools. None of them talk to each other.
+                   You're drowning in JSON outputs nobody reads."
+    />
+    <ProblemCard
+      icon={<AlertTriangle />}
+      title="Noise Everywhere"
+      description="False positives, duplicate findings, flaky tests.
+                   Your team ignores 80% of alerts."
+    />
+    <ProblemCard
+      icon={<Shield />}
+      title="No Governance"
+      description="Who approved this scan? What's the scope?
+                   Where's the evidence? Auditors ask, you scramble."
+    />
+    <ProblemCard
+      icon={<Target />}
+      title="Coverage ≠ Confidence"
+      description="100% code coverage means nothing if you can't
+                   reproduce a single finding."
+    />
+  </Section>
+
+  Solution Section:
+  <Section title="What TestUniverse Does Differently">
+    <SolutionCard
+      number="01"
+      title="Orchestrates, Doesn't Replace"
+      description="We wrap Playwright, Lighthouse, ZAP, Axe, k6, and more.
+                   Best-in-class tools, unified interface."
+      visual={<PluginGrid plugins={['playwright', 'lighthouse', 'zap', 'axe', 'k6', 'newman']} />}
+    />
+    <SolutionCard
+      number="02"
+      title="Governance Built-In"
+      description="Every scan requires authorization proof, scope allowlist,
+                   and rate limits. The Governor agent has veto power."
+      visual={<GovernorDiagram />}
+    />
+    <SolutionCard
+      number="03"
+      title="Evidence for Every Claim"
+      description="No finding without proof. Screenshots, HAR files,
+                   reproduction steps, and video traces attached."
+      visual={<EvidencePreview />}
+    />
+    <SolutionCard
+      number="04"
+      title="Confidence, Not Coverage"
+      description="Dedupe, flake detection, severity scoring, and
+                   verification reruns. Only real issues surface."
+      visual={<ConfidenceScore value={0.94} />}
+    />
+  </Section>
+
+  What Makes It Different Section:
+  <Section title="Why Engineers Trust TestUniverse">
+    <DifferentiatorGrid>
+      <Differentiator
+        title="Constitutional AI"
+        description="5 immutable rules that cannot be bypassed.
+                     Governance > Autonomy. Always."
+        link="/architecture#constitution"
+      />
+      <Differentiator
+        title="10 Specialized Agents"
+        description="Planner, Governor, Sentinel, Scholar, Economist...
+                     Each with clear responsibility and boundaries."
+        link="/how-it-works#agents"
+      />
+      <Differentiator
+        title="Universal Finding Schema"
+        description="Every tool's output normalized to one schema.
+                     Compare ZAP to Lighthouse to Axe. Finally."
+        link="/architecture#finding-schema"
+      />
+      <Differentiator
+        title="Attack Mode Gating"
+        description="Active security scanning requires 3-step approval.
+                     Audit trail for every destructive action."
+        link="/how-it-works#attack-mode"
+      />
+    </DifferentiatorGrid>
+  </Section>
+
+  Social Proof Section (placeholder for future):
+  <Section title="Trusted By">
+    <LogoGrid>
+      {/* Placeholder logos - replace with real ones */}
+      <Logo name="Your Company Here" />
+    </LogoGrid>
+
+    <TestimonialCarousel>
+      <Testimonial
+        quote="Finally, a testing framework that understands governance
+               isn't optional—it's essential."
+        author="Security Engineer"
+        role="Enterprise SaaS"
+      />
+    </TestimonialCarousel>
+  </Section>
+
+  CTA Footer:
+  <CTASection>
+    <h2>"Ready to test with confidence?"</h2>
+    <div className="flex gap-4">
+      <Button href="/docs/quickstart">Get Started (5 min)</Button>
+      <Button href="https://github.com/..." variant="outline">
+        <GitHubIcon /> View on GitHub
+      </Button>
+    </div>
+  </CTASection>
+
+  ====================
+  PAGE 2: HOW IT WORKS (/how-it-works)
+
+  Multi-Pass Testing Section:
+  <Section title="Multi-Pass Testing Strategy">
+    <p className="lead">
+      "TestUniverse doesn't just run tests. It thinks about what to test,
+       validates findings, and learns from history."
+    </p>
+
+    <PassTimeline>
+      <Pass
+        number={1}
+        name="RECON"
+        duration="5-10 min"
+        description="Fingerprint the target. Discover routes, detect stack,
+                     identify auth requirements, find API endpoints."
+        outputs={['47 routes', 'Next.js detected', 'JWT auth', 'GraphQL endpoint']}
+        color="blue"
+      />
+      <Pass
+        number={2}
+        name="PLANNING"
+        duration="< 1 min"
+        description="Planner agent selects test families, chooses plugins,
+                     allocates budget based on target fingerprint."
+        outputs={['webapp-standard pack', '6 plugins selected', '30 min budget']}
+        color="purple"
+      />
+      <Pass
+        number={3}
+        name="EXECUTION"
+        duration="10-30 min"
+        description="Run plugins in parallel (DAG-ordered). Capture artifacts.
+                     Sentinel monitors for overload. Economist tracks budget."
+        outputs={['Lighthouse', 'Axe', 'ZAP baseline', 'Security headers']}
+        color="amber"
+      />
+      <Pass
+        number={4}
+        name="TRIAGE"
+        duration="< 1 min"
+        description="Deduplicate findings. Score severity. Adjust confidence.
+                     Filter flaky results. Compare to baseline."
+        outputs={['23 raw → 12 unique', '2 HIGH, 4 MEDIUM', '94% confidence']}
+        color="emerald"
+      />
+      <Pass
+        number={5}
+        name="VERIFY"
+        duration="Optional"
+        description="Rerun to confirm findings are reproducible.
+                     Flaky findings downgraded. Deterministic findings boosted."
+        outputs={['11/12 confirmed', '1 marked intermittent']}
+        color="green"
+      />
+    </PassTimeline>
+  </Section>
+
+  Agent Roles Section:
+  <Section id="agents" title="The 10 Agents">
+    <p className="lead">
+      "Inspired by separation of powers. Each agent has one job,
+       clear boundaries, and cannot exceed its authority."
+    </p>
+
+    <AgentGrid>
+      <AgentCard
+        name="Architect"
+        icon={<Building />}
+        role="Purpose & Vision"
+        responsibility="Defines quality priorities. Security vs UX vs uptime.
+                        Sets the 'why' before capability."
+        color="slate"
+      />
+      <AgentCard
+        name="Governor"
+        icon={<Shield />}
+        role="Law & Enforcement"
+        responsibility="Validates authorization. Enforces scope. Controls rate limits.
+                        Has VETO POWER over all other agents."
+        color="red"
+        highlight={true}
+      />
+      <AgentCard
+        name="Planner"
+        icon={<Map />}
+        role="Strategy"
+        responsibility="Converts 'test this' into structured plan.
+                        Selects families, plugins, and execution order."
+        color="purple"
+      />
+      <AgentCard
+        name="Builder"
+        icon={<Hammer />}
+        role="Engineering"
+        responsibility="Generates test code. Creates fix PRs.
+                        Implements approved changes only."
+        color="blue"
+      />
+      <AgentCard
+        name="Operator"
+        icon={<Play />}
+        role="Execution"
+        responsibility="Runs plugins in Docker sandboxes.
+                        Manages containers, captures output."
+        color="green"
+      />
+      <AgentCard
+        name="Scholar"
+        icon={<BookOpen />}
+        role="Memory"
+        responsibility="Stores finding history. Tracks suppressions.
+                        Detects recurring patterns. Your compounding advantage."
+        color="amber"
+      />
+      <AgentCard
+        name="Scientist"
+        icon={<Flask />}
+        role="Discovery"
+        responsibility="Experiments with heuristics in sandbox.
+                        Tests new detection patterns safely."
+        color="cyan"
+      />
+      <AgentCard
+        name="Economist"
+        icon={<DollarSign />}
+        role="Resources"
+        responsibility="Allocates budget. Calculates ROI per plugin.
+                        Stops when confidence threshold reached."
+        color="emerald"
+      />
+      <AgentCard
+        name="Diplomat"
+        icon={<MessageSquare />}
+        role="Communication"
+        responsibility="Generates reports. Creates tickets.
+                        Translates jargon to business impact."
+        color="pink"
+      />
+      <AgentCard
+        name="Sentinel"
+        icon={<Eye />}
+        role="Monitoring"
+        responsibility="Watches for overload. Tracks flakiness.
+                        Halts on scope violations. Emergency stop."
+        color="orange"
+      />
+    </AgentGrid>
+  </Section>
+
+  Plugin System Section:
+  <Section title="Plugin System">
+    <p className="lead">
+      "We don't reinvent tools. We wrap the best ones and normalize their output."
+    </p>
+
+    <PluginPhilosophy>
+      <PhilosophyPoint icon={<Box />}>
+        "Every plugin runs in an isolated Docker container"
+      </PhilosophyPoint>
+      <PhilosophyPoint icon={<FileJson />}>
+        "Every output normalizes to Universal Finding schema"
+      </PhilosophyPoint>
+      <PhilosophyPoint icon={<Lock />}>
+        "Every execution approved by Governor first"
+      </PhilosophyPoint>
+      <PhilosophyPoint icon={<Camera />}>
+        "Every finding includes evidence artifacts"
+      </PhilosophyPoint>
+    </PluginPhilosophy>
+
+    <PluginShowcase>
+      <PluginDemo
+        name="Playwright"
+        image="playwright-logo.svg"
+        purpose="E2E functional tests, video recording, trace capture"
+        artifacts={['trace.zip', 'screenshot.png', 'video.webm']}
+      />
+      <PluginDemo
+        name="Lighthouse"
+        image="lighthouse-logo.svg"
+        purpose="Core Web Vitals, SEO, accessibility, best practices"
+        artifacts={['report.html', 'report.json']}
+      />
+      <PluginDemo
+        name="OWASP ZAP"
+        image="zap-logo.svg"
+        purpose="DAST security scanning, OWASP Top 10"
+        artifacts={['alerts.json', 'report.html', 'har.har']}
+      />
+      <PluginDemo
+        name="axe-core"
+        image="axe-logo.svg"
+        purpose="WCAG accessibility violations with selectors"
+        artifacts={['violations.json']}
+      />
+    </PluginShowcase>
+  </Section>
+
+  Confidence & Flake Handling Section:
+  <Section title="Confidence Scoring">
+    <p className="lead">
+      "Not all findings are equal. We score confidence based on
+       reproducibility, evidence quality, and historical patterns."
+    </p>
+
+    <ConfidenceExplainer>
+      <ConfidenceFactor
+        name="Deterministic Reproduction"
+        impact="+15%"
+        description="Finding reproduced 3/3 times identically"
+      />
+      <ConfidenceFactor
+        name="Evidence Quality"
+        impact="+10%"
+        description="Screenshot + HAR + reproduction steps attached"
+      />
+      <ConfidenceFactor
+        name="Historical Pattern"
+        impact="+5%"
+        description="Seen in 5 previous runs on this target"
+      />
+      <ConfidenceFactor
+        name="Flaky History"
+        impact="-30%"
+        description="Failed to reproduce in 2/5 runs"
+      />
+    </ConfidenceExplainer>
+
+    <FlakeHandling>
+      <h3>"How We Handle Flaky Tests"</h3>
+      <FlakeFlow>
+        <FlakeStep step={1}>
+          "First failure: Retry immediately (max 3x)"
+        </FlakeStep>
+        <FlakeStep step={2}>
+          "Intermittent: Mark as 'suspected', reduce confidence"
+        </FlakeStep>
+        <FlakeStep step={3}>
+          "Chronic flake: Quarantine, don't report until stable"
+        </FlakeStep>
+        <FlakeStep step={4}>
+          "Environment-only: Tag as env-dependent, skip in CI"
+        </FlakeStep>
+      </FlakeFlow>
+    </FlakeHandling>
+  </Section>
+
+  Safety Boundaries Section:
+  <Section id="attack-mode" title="Safety Boundaries">
+    <p className="lead">
+      "We take safety seriously. These aren't suggestions—they're enforced."
+    </p>
+
+    <SafetyGrid>
+      <SafetyRule
+        icon={<Lock />}
+        title="Authorization Required"
+        description="Every scan requires proof of authorization.
+                     Owner contact, written permission, time window."
+        enforcement="Governor validates before any plugin runs"
+      />
+      <SafetyRule
+        icon={<Target />}
+        title="Scope Allowlist"
+        description="Only test what's explicitly allowed.
+                     No accidental third-party scanning."
+        enforcement="ScopeEnforcer blocks out-of-scope requests"
+      />
+      <SafetyRule
+        icon={<Gauge />}
+        title="Rate Limits"
+        description="Default: 2 req/s, 3 concurrent, 2000 max.
+                     Auto-throttle on 429 responses."
+        enforcement="RateLimiter with token bucket algorithm"
+      />
+      <SafetyRule
+        icon={<AlertOctagon />}
+        title="Attack Mode Gating"
+        description="Active security testing (fuzzing, injection)
+                     requires 3-step approval process."
+        enforcement="AttackModeGate with audit trail"
+        highlight={true}
+      />
+    </SafetyGrid>
+
+    <AttackModeExplainer>
+      <h3>"Attack Mode Requires:"</h3>
+      <RequirementList>
+        <Requirement number={1}>
+          "policy.attack_mode_enabled = true in configuration"
+        </Requirement>
+        <Requirement number={2}>
+          "Valid GovernorApproval token (not expired)"
+        </Requirement>
+        <Requirement number={3}>
+          "Explicit AttackScope with allowed hosts (no wildcards)"
+        </Requirement>
+      </RequirementList>
+      <p className="text-sm text-slate-400">
+        "All attack mode requests are logged immutably.
+         Audit trail available for compliance."
+      </p>
+    </AttackModeExplainer>
+  </Section>
+
+  ====================
+  PAGE 3: ARCHITECTURE (/architecture)
+
+  System Overview Section:
+  <Section title="System Architecture">
+    <p className="lead">
+      "Built for extensibility, safety, and scale.
+       Every component has clear boundaries and responsibilities."
+    </p>
+
+    <ArchitectureDiagram>
+      {/* Mermaid diagram rendered server-side */}
+      ```mermaid
+      graph TB
+        subgraph "Input Layer"
+          T[Target Config]
+          P[Policy Config]
+          PL[Plan Config]
+        end
+
+        subgraph "Governance Layer"
+          GOV[Governor Agent]
+          AUTH[Authorization Validator]
+          SCOPE[Scope Enforcer]
+          RATE[Rate Limiter]
+        end
+
+        subgraph "Planning Layer"
+          PLAN[Planner Agent]
+          FINGER[Fingerprint Analyzer]
+          BUDGET[Budget Scheduler]
+        end
+
+        subgraph "Execution Layer"
+          ENGINE[Execution Engine]
+          QUEUE[Task Queue]
+          WORKERS[Worker Pool]
+          SANDBOX[Docker Sandbox]
+        end
+
+        subgraph "Plugin Layer"
+          RECON[Recon Plugin]
+          LH[Lighthouse]
+          AXE[Axe]
+          ZAP[ZAP]
+          K6[k6]
+        end
+
+        subgraph "Triage Layer"
+          DEDUPE[Dedupe Engine]
+          SCORE[Severity Scorer]
+          CONF[Confidence Adjuster]
+          FLAKE[Flake Classifier]
+        end
+
+        subgraph "Output Layer"
+          REPORT[Report Generator]
+          EVIDENCE[Evidence Bundle]
+          NOTIFY[Notifications]
+        end
+
+        T --> GOV
+        P --> GOV
+        PL --> GOV
+        GOV --> PLAN
+        PLAN --> ENGINE
+        ENGINE --> SANDBOX
+        SANDBOX --> RECON & LH & AXE & ZAP & K6
+        RECON & LH & AXE & ZAP & K6 --> DEDUPE
+        DEDUPE --> SCORE --> CONF --> FLAKE
+        FLAKE --> REPORT & EVIDENCE & NOTIFY
+      ```
+    </ArchitectureDiagram>
+  </Section>
+
+  Execution Pipeline Section:
+  <Section id="pipeline" title="Execution Pipeline (DAG)">
+    <p className="lead">
+      "Tests execute as a directed acyclic graph.
+       Dependencies respected. Parallelism maximized."
+    </p>
+
+    <PipelinePhases>
+      <Phase name="INIT" description="Load configs, validate inputs" />
+      <Phase name="RECON" description="Fingerprint target" />
+      <Phase name="SELECT" description="Choose plugins based on fingerprint" />
+      <Phase name="CONFIGURE" description="Generate execution specs" />
+      <Phase name="EXECUTE" description="Run plugins (parallel where possible)" />
+      <Phase name="NORMALIZE" description="Convert outputs to Finding schema" />
+      <Phase name="DEDUPE" description="Remove duplicates" />
+      <Phase name="SCORE" description="Calculate severity and confidence" />
+      <Phase name="REPORT" description="Generate outputs" />
+    </PipelinePhases>
+
+    <DAGVisualization>
+      {/* Interactive DAG showing plugin dependencies */}
+      <DAGNode id="recon" label="Recon" dependencies={[]} />
+      <DAGNode id="lighthouse" label="Lighthouse" dependencies={['recon']} />
+      <DAGNode id="axe" label="Axe" dependencies={['recon']} />
+      <DAGNode id="zap" label="ZAP Baseline" dependencies={['recon']} />
+      <DAGNode id="headers" label="Headers" dependencies={['recon']} />
+      <DAGNode id="secrets" label="Secrets" dependencies={['recon']} />
+      <DAGNode id="dedupe" label="Dedupe" dependencies={['lighthouse', 'axe', 'zap', 'headers', 'secrets']} />
+      <DAGNode id="report" label="Report" dependencies={['dedupe']} />
+    </DAGVisualization>
+  </Section>
+
+  Plugin Lifecycle Section:
+  <Section title="Plugin Lifecycle">
+    <LifecycleFlow>
+      <LifecycleStep
+        step={1}
+        name="Discover"
+        description="Registry scans plugin directories, validates manifests"
+        code={`registry.discover_plugins('./plugins')`}
+      />
+      <LifecycleStep
+        step={2}
+        name="Validate"
+        description="Governor approves plugin for this target/policy"
+        code={`governor.approve_plugin(plugin_id, target, policy)`}
+      />
+      <LifecycleStep
+        step={3}
+        name="Configure"
+        description="Plugin generates ExecutionSpec (Docker config)"
+        code={`spec = plugin.configure(target, policy, plan)`}
+      />
+      <LifecycleStep
+        step={4}
+        name="Execute"
+        description="Sandbox runs container with resource limits"
+        code={`result = sandbox.run_container(spec)`}
+      />
+      <LifecycleStep
+        step={5}
+        name="Collect"
+        description="Artifacts gathered from container output"
+        code={`artifacts = plugin.collect_artifacts(result)`}
+      />
+      <LifecycleStep
+        step={6}
+        name="Normalize"
+        description="Raw output converted to Universal Findings"
+        code={`findings = plugin.normalize(result, artifacts)`}
+      />
+    </LifecycleFlow>
+  </Section>
+
+  Finding Schema Section:
+  <Section id="finding-schema" title="Universal Finding Schema">
+    <p className="lead">
+      "Every plugin outputs the same schema. Compare ZAP to Lighthouse to Axe.
+       Finally, apples to apples."
+    </p>
+
+    <SchemaViewer>
+      <JSONSchema
+        schema={{
+          schema_version: "1.0.0",
+          finding_id: "find_abc123",
+          run_id: "run_xyz789",
+          target_id: "my-webapp",
+          title: "Missing HttpOnly flag on session cookie",
+          family: "security",
+          category: "cookie-security",
+          severity: "high",
+          confidence: 0.92,
+          tool: {
+            plugin_id: "zap-baseline",
+            tool_name: "OWASP ZAP",
+            rule_id: "10010"
+          },
+          impact: {
+            types: ["security", "compliance"],
+            business_risk: "Session hijacking via XSS",
+            exploitability: 0.7,
+            blast_radius: "single_user"
+          },
+          location: {
+            url: "https://example.com/login",
+            method: "POST",
+            parameter: "Set-Cookie"
+          },
+          evidence: [{
+            type: "har",
+            artifact_ref: "artifacts/network.har",
+            description: "HTTP response showing cookie without HttpOnly"
+          }],
+          repro: {
+            steps: [
+              "Navigate to /login",
+              "Submit valid credentials",
+              "Inspect Set-Cookie header in response"
+            ],
+            expected: "HttpOnly flag present",
+            actual: "HttpOnly flag missing"
+          },
+          fix: {
+            summary: "Add HttpOnly flag to session cookie",
+            guidance: "Configure your session middleware to set HttpOnly=true",
+            references: ["https://owasp.org/..."]
+          },
+          timestamps: {
+            detected_at: "2024-01-15T10:30:00Z",
+            verified_at: "2024-01-15T10:35:00Z"
+          }
+        }}
+      />
+    </SchemaViewer>
+
+    <SchemaDownloads>
+      <DownloadLink href="/schemas/finding.schema.json">
+        Download JSON Schema
+      </DownloadLink>
+      <DownloadLink href="/schemas/finding.d.ts">
+        Download TypeScript Types
+      </DownloadLink>
+      <DownloadLink href="https://github.com/.../schemas">
+        View on GitHub
+      </DownloadLink>
+    </SchemaDownloads>
+  </Section>
+
+  Evidence Flow Section:
+  <Section title="Evidence Flow">
+    <EvidenceFlow>
+      <EvidenceStep
+        stage="Capture"
+        description="Plugin produces raw artifacts during execution"
+        artifacts={['screenshot.png', 'trace.zip', 'network.har', 'report.json']}
+      />
+      <EvidenceStep
+        stage="Store"
+        description="ArtifactStore persists with SHA256 checksums"
+        artifacts={['Local filesystem', 'S3-compatible', 'Memory (testing)']}
+      />
+      <EvidenceStep
+        stage="Link"
+        description="Each Finding references its evidence artifacts"
+        code={`finding.evidence = [{ type: 'screenshot', artifact_ref: 'run_123/lighthouse/screenshot.png' }]`}
+      />
+      <EvidenceStep
+        stage="Bundle"
+        description="EvidenceBundle creates ZIP for sharing"
+        artifacts={['findings.json', 'artifacts/', 'manifest.json']}
+      />
+      <EvidenceStep
+        stage="Retain"
+        description="RetentionPolicy controls cleanup (severity-based)"
+        code={`CRITICAL: 365 days, HIGH: 180 days, MEDIUM: 90 days, LOW: 30 days`}
+      />
+    </EvidenceFlow>
+  </Section>
+
+  CI/CD Integration Section:
+  <Section title="CI/CD Integration">
+    <CIIntegrationDiagram>
+      ```mermaid
+      sequenceDiagram
+        participant PR as Pull Request
+        participant CI as CI Pipeline
+        participant TU as TestUniverse
+        participant GH as GitHub Security
+
+        PR->>CI: Push / PR opened
+        CI->>TU: aiciv run --mode=ci
+        TU->>TU: Execute test plan
+        TU->>CI: Exit code (0/1/2/3/4/5)
+        TU->>GH: Upload SARIF
+        TU->>PR: Post comment with summary
+        CI->>PR: Pass / Fail status
+      ```
+    </CIIntegrationDiagram>
+
+    <ExitCodeReference>
+      <ExitCode code={0} name="PASS" description="Quality gate passed" />
+      <ExitCode code={1} name="GATE_FAIL" description="Findings exceeded threshold" />
+      <ExitCode code={2} name="AUTH_BLOCKED" description="Authorization denied" />
+      <ExitCode code={3} name="INTERNAL_ERROR" description="Unexpected error" />
+      <ExitCode code={4} name="TIMEOUT" description="Timebox exceeded" />
+      <ExitCode code={5} name="TARGET_UNREACHABLE" description="Cannot connect" />
+    </ExitCodeReference>
+  </Section>
+
+  Constitution Section:
+  <Section id="constitution" title="The Constitution">
+    <p className="lead">
+      "5 immutable rules that cannot be bypassed, modified, or overridden.
+       These are not configurable. They are enforced."
+    </p>
+
+    <ConstitutionRules>
+      <Rule number={1} title="Purpose > Intelligence">
+        "Clear quality goals before capability.
+         Know WHY you're testing before HOW."
+      </Rule>
+      <Rule number={2} title="Governance > Autonomy">
+        "Authorization and scope enforcement always.
+         Governor has absolute veto power."
+      </Rule>
+      <Rule number={3} title="Boundaries > Capability">
+        "Rate limits and safety constraints enforced.
+         Can't bypass. Can't disable."
+      </Rule>
+      <Rule number={4} title="Memory > Speed">
+        "Audit trails and evidence required.
+         Every action logged immutably."
+      </Rule>
+      <Rule number={5} title="Structure > Cleverness">
+        "Plugin architecture over ad-hoc testing.
+         Reproducible, not magical."
+      </Rule>
+    </ConstitutionRules>
+  </Section>
+
+  ====================
+  PAGE 4: TEST COVERAGE (/coverage)
+
+  <PageHeader
+    title="Test Coverage by Family"
+    subtitle="What TestUniverse can test, and the evidence it produces"
+  />
+
+  <CoverageTable>
+    <thead>
+      <tr>
+        <th>Test Family</th>
+        <th>What's Covered</th>
+        <th>Plugins</th>
+        <th>Evidence Produced</th>
+      </tr>
+    </thead>
+    <tbody>
+      <CoverageRow
+        family="Functional"
+        familyIcon={<Play />}
+        coverage={[
+          "User journeys",
+          "Form submissions",
+          "Authentication flows",
+          "Navigation",
+          "Error handling"
+        ]}
+        plugins={[
+          { name: "Playwright", status: "implemented" },
+          { name: "Cypress", status: "planned" }
+        ]}
+        evidence={[
+          "Video recordings",
+          "Playwright traces",
+          "Screenshots on failure",
+          "Console logs"
+        ]}
+      />
+      <CoverageRow
+        family="Security"
+        familyIcon={<Shield />}
+        coverage={[
+          "OWASP Top 10",
+          "Security headers",
+          "Cookie security",
+          "TLS configuration",
+          "Secrets exposure",
+          "Dependency vulnerabilities"
+        ]}
+        plugins={[
+          { name: "ZAP Baseline", status: "implemented" },
+          { name: "ZAP Full", status: "implemented", requiresApproval: true },
+          { name: "Security Headers", status: "implemented" },
+          { name: "Secrets Scanner", status: "implemented" },
+          { name: "Dependency Check", status: "implemented" }
+        ]}
+        evidence={[
+          "HAR files",
+          "ZAP reports (HTML/JSON)",
+          "Request/response pairs",
+          "SBOM (CycloneDX)"
+        ]}
+      />
+      <CoverageRow
+        family="Performance"
+        familyIcon={<Gauge />}
+        coverage={[
+          "Core Web Vitals (LCP, CLS, INP)",
+          "Time to First Byte",
+          "Speed Index",
+          "Load testing",
+          "Stress testing"
+        ]}
+        plugins={[
+          { name: "Lighthouse", status: "implemented" },
+          { name: "k6", status: "implemented" },
+          { name: "k6 Stress", status: "implemented", requiresApproval: true }
+        ]}
+        evidence={[
+          "Lighthouse reports (HTML/JSON)",
+          "k6 metrics",
+          "Latency distributions",
+          "Throughput graphs"
+        ]}
+      />
+      <CoverageRow
+        family="Accessibility"
+        familyIcon={<Eye />}
+        coverage={[
+          "WCAG 2.1 Level A/AA/AAA",
+          "Color contrast",
+          "Keyboard navigation",
+          "Screen reader labels",
+          "Focus management",
+          "Heading structure"
+        ]}
+        plugins={[
+          { name: "Axe", status: "implemented" },
+          { name: "Lighthouse A11y", status: "implemented" }
+        ]}
+        evidence={[
+          "Element selectors",
+          "WCAG criterion mapping",
+          "Fix recommendations",
+          "Compliance percentages"
+        ]}
+      />
+      <CoverageRow
+        family="API"
+        familyIcon={<Code />}
+        coverage={[
+          "REST contract validation",
+          "OpenAPI schema compliance",
+          "GraphQL schema validation",
+          "Response schema matching",
+          "Authentication testing"
+        ]}
+        plugins={[
+          { name: "Newman", status: "implemented" },
+          { name: "OpenAPI Validator", status: "implemented" },
+          { name: "GraphQL Tester", status: "implemented" }
+        ]}
+        evidence={[
+          "JUnit XML",
+          "Schema diff reports",
+          "Request/response logs"
+        ]}
+      />
+      <CoverageRow
+        family="Compatibility"
+        familyIcon={<Monitor />}
+        coverage={[
+          "Browser matrix",
+          "Viewport testing",
+          "Device emulation",
+          "Locale testing"
+        ]}
+        plugins={[
+          { name: "Playwright Matrix", status: "implemented" }
+        ]}
+        evidence={[
+          "Cross-browser screenshots",
+          "Viewport comparisons"
+        ]}
+      />
+      <CoverageRow
+        family="Data"
+        familyIcon={<Database />}
+        coverage={[
+          "Database integrity",
+          "Migration validation",
+          "PII detection"
+        ]}
+        plugins={[
+          { name: "Data Validator", status: "planned" }
+        ]}
+        evidence={[
+          "Schema diffs",
+          "PII reports"
+        ]}
+        status="coming-soon"
+      />
+      <CoverageRow
+        family="Observability"
+        familyIcon={<Activity />}
+        coverage={[
+          "Synthetic monitoring",
+          "SLO evaluation",
+          "Log anomaly detection"
+        ]}
+        plugins={[
+          { name: "Synthetic Monitor", status: "planned" },
+          { name: "SLO Evaluator", status: "planned" }
+        ]}
+        evidence={[
+          "Health check results",
+          "SLO burn rate"
+        ]}
+        status="coming-soon"
+      />
+      <CoverageRow
+        family="Infrastructure"
+        familyIcon={<Server />}
+        coverage={[
+          "Container security",
+          "IaC scanning",
+          "Kubernetes compliance",
+          "Cloud security posture"
+        ]}
+        plugins={[
+          { name: "Trivy", status: "planned" },
+          { name: "Checkov", status: "planned" },
+          { name: "kube-bench", status: "planned" }
+        ]}
+        evidence={[
+          "CVE reports",
+          "CIS benchmark results"
+        ]}
+        status="coming-soon"
+      />
+      <CoverageRow
+        family="Desktop/CLI"
+        familyIcon={<Terminal />}
+        coverage={[
+          "CLI smoke tests",
+          "Desktop UI automation",
+          "Installer validation"
+        ]}
+        plugins={[
+          { name: "CLI Runner", status: "planned" },
+          { name: "WinAppDriver", status: "planned" }
+        ]}
+        evidence={[
+          "Exit codes",
+          "Screenshots",
+          "Logs"
+        ]}
+        status="coming-soon"
+      />
+      <CoverageRow
+        family="Mobile"
+        familyIcon={<Smartphone />}
+        coverage={[
+          "Android/iOS testing",
+          "Mobile performance",
+          "Mobile accessibility"
+        ]}
+        plugins={[
+          { name: "Appium", status: "planned" },
+          { name: "Device Farm", status: "planned" }
+        ]}
+        evidence={[
+          "Device screenshots",
+          "Video recordings"
+        ]}
+        status="coming-soon"
+      />
+    </tbody>
+  </CoverageTable>
+
+  <CoverageNote>
+    <p>
+      "All implemented plugins produce evidence.
+       All findings link to reproducible artifacts.
+       No claim without proof."
+    </p>
+  </CoverageNote>
+
+  ====================
+  PAGE 5: REAL TEST RESULTS (/results)
+
+  <PageHeader
+    title="Real Test Results"
+    subtitle="Proof that TestUniverse works. Not mockups—actual findings from real scans."
+  />
+
+  <ResultsDisclaimer>
+    "All results below are from scans against intentionally vulnerable
+     demo applications. Sensitive details redacted."
+  </ResultsDisclaimer>
+
+  <Section title="Example: Vulnerable Web Application">
+    <ScanSummary
+      target="demo-vulnerable-app (OWASP Juice Shop variant)"
+      duration="12 minutes"
+      plugins={['Recon', 'ZAP Baseline', 'Security Headers', 'Lighthouse', 'Axe']}
+      findings={{ critical: 2, high: 5, medium: 8, low: 3 }}
+      confidence={0.94}
+      gateStatus="FAILED"
+    />
+
+    <ReportPreview>
+      <ReportScreenshot
+        src="/images/results/report-overview.png"
+        alt="HTML report overview showing findings summary"
+        caption="Executive summary with severity distribution"
+      />
+      <ReportScreenshot
+        src="/images/results/report-findings.png"
+        alt="Findings list with filtering"
+        caption="Interactive findings table with search and filters"
+      />
+      <ReportScreenshot
+        src="/images/results/report-evidence.png"
+        alt="Evidence modal showing HAR capture"
+        caption="Evidence viewer with request/response details"
+      />
+    </ReportPreview>
+
+    <FindingExamples>
+      <FindingCard
+        title="SQL Injection in Search Parameter"
+        severity="CRITICAL"
+        confidence={0.98}
+        tool="ZAP Baseline"
+        description="Search parameter 'q' vulnerable to SQL injection via
+                     error-based technique."
+        evidence={{
+          type: "HAR",
+          preview: "GET /search?q=1' OR '1'='1 → 500 Internal Server Error
+                    Response contains: 'SQLITE_ERROR: near...'"
+        }}
+        reproduction={[
+          "Navigate to /search",
+          "Enter: 1' OR '1'='1",
+          "Observe error message revealing SQL syntax"
+        ]}
+        fix="Use parameterized queries. Never concatenate user input."
+      />
+
+      <FindingCard
+        title="Missing Content-Security-Policy Header"
+        severity="HIGH"
+        confidence={0.95}
+        tool="Security Headers"
+        description="No CSP header present. Application vulnerable to XSS attacks."
+        evidence={{
+          type: "HTTP Headers",
+          preview: "HTTP/1.1 200 OK
+                    X-Frame-Options: DENY
+                    ❌ Content-Security-Policy: (missing)"
+        }}
+        reproduction={[
+          "Request any page",
+          "Inspect response headers",
+          "CSP header absent"
+        ]}
+        fix="Add CSP header: default-src 'self'; script-src 'self'"
+      />
+
+      <FindingCard
+        title="Color Contrast Insufficient"
+        severity="MEDIUM"
+        confidence={0.91}
+        tool="Axe"
+        wcag="1.4.3 Contrast (Level AA)"
+        description="Text has insufficient contrast ratio of 2.8:1 (required: 4.5:1)"
+        evidence={{
+          type: "Screenshot",
+          preview: "[Screenshot showing gray text on light background]"
+        }}
+        selector="button.secondary-action"
+        reproduction={[
+          "Navigate to /checkout",
+          "Locate 'Cancel' button",
+          "Contrast ratio: 2.8:1"
+        ]}
+        fix="Change text color from #999999 to #595959"
+      />
+    </FindingExamples>
+  </Section>
+
+  <Section title="Example: Marketing Site (Performance Focus)">
+    <ScanSummary
+      target="demo-marketing-site"
+      duration="8 minutes"
+      plugins={['Recon', 'Lighthouse', 'Axe']}
+      findings={{ critical: 0, high: 1, medium: 4, low: 2 }}
+      confidence={0.92}
+      gateStatus="PASSED"
+    />
+
+    <CoreWebVitalsDisplay>
+      <Metric name="LCP" value="3.2s" threshold="2.5s" status="needs-improvement" />
+      <Metric name="CLS" value="0.08" threshold="0.1" status="good" />
+      <Metric name="INP" value="180ms" threshold="200ms" status="good" />
+      <Metric name="FCP" value="1.8s" threshold="1.8s" status="good" />
+      <Metric name="TTFB" value="0.4s" threshold="0.8s" status="good" />
+    </CoreWebVitalsDisplay>
+
+    <LighthouseReport>
+      <ReportScreenshot
+        src="/images/results/lighthouse-scores.png"
+        alt="Lighthouse scores: Performance 72, A11y 89, BP 95, SEO 92"
+      />
+    </LighthouseReport>
+  </Section>
+
+  <Section title="Example: API with OpenAPI Spec">
+    <ScanSummary
+      target="demo-api (OpenAPI 3.0)"
+      duration="5 minutes"
+      plugins={['Recon', 'OpenAPI Validator', 'Security Headers']}
+      findings={{ critical: 0, high: 0, medium: 3, low: 1 }}
+      confidence={0.96}
+      gateStatus="PASSED"
+    />
+
+    <APIContractFindings>
+      <ContractViolation
+        endpoint="POST /users"
+        issue="Response missing required field 'created_at'"
+        expected="{ id, email, created_at }"
+        actual="{ id, email }"
+      />
+      <ContractViolation
+        endpoint="GET /users/{id}"
+        issue="404 response doesn't match error schema"
+        expected="{ error: { code, message } }"
+        actual="{ message: 'Not found' }"
+      />
+    </APIContractFindings>
+  </Section>
+
+  <Section title="Output Formats">
+    <OutputFormatShowcase>
+      <OutputFormat
+        name="HTML Report"
+        description="Interactive report for humans"
+        preview={<HTMLReportPreview />}
+        download="/samples/report.html"
+      />
+      <OutputFormat
+        name="SARIF"
+        description="Static Analysis Results for GitHub Security"
+        preview={<SARIFPreview />}
+        download="/samples/report.sarif"
+      />
+      <OutputFormat
+        name="JUnit XML"
+        description="CI/CD integration"
+        preview={<JUnitPreview />}
+        download="/samples/report.junit.xml"
+      />
+      <OutputFormat
+        name="JSON"
+        description="Machine-readable for custom processing"
+        preview={<JSONPreview />}
+        download="/samples/report.json"
+      />
+    </OutputFormatShowcase>
+  </Section>
+
+  <Section title="CI Gate Example">
+    <CIGateExample>
+      <Terminal title="GitHub Actions Output">
+        {`
+  Run aiciv run https://staging.example.com --mode=ci --gate="critical=0,high=3"
+
+  ✓ Recon complete
+  ✓ Plugins executed: 5/5
+  ✓ Findings normalized: 12
+
+  Quality Gate Evaluation:
+    CRITICAL: 0 (threshold: 0) ✓
+    HIGH: 5 (threshold: 3) ✗
+    MEDIUM: 4 (no threshold)
+    LOW: 3 (no threshold)
+
+  ❌ GATE FAILED: 5 HIGH findings exceed threshold of 3
+
+  Reports generated:
+    - report.html
+    - report.sarif (uploaded to GitHub Security)
+    - report.junit.xml
+
+  Exit code: 1 (GATE_FAIL)
+        `}
+      </Terminal>
+
+      <PRComment>
+        <PRCommentPreview>
+          {`
+  ## 🔍 TestUniverse Scan Results
+
+  **Status:** ❌ Quality Gate Failed
+
+  | Severity | Count | Threshold |
+  |----------|-------|-----------|
+  | Critical | 0 | 0 ✅ |
+  | High | 5 | 3 ❌ |
+  | Medium | 4 | - |
+  | Low | 3 | - |
+
+  ### Top Findings
+
+  1. **[HIGH]** SQL Injection in /api/search
+  2. **[HIGH]** Missing rate limiting on /api/login
+  3. **[HIGH]** Sensitive data in error responses
+
+  [View Full Report](https://...)
+          `}
+        </PRCommentPreview>
+      </PRComment>
+    </CIGateExample>
+  </Section>
+
+  <Section title="Verification: Confirmed vs Suspected">
+    <VerificationExplainer>
+      <p className="lead">
+        "Not all findings are created equal. We classify by reproducibility."
+      </p>
+
+      <VerificationCategories>
+        <Category
+          name="Confirmed"
+          percentage={85}
+          description="Reproduced deterministically 3/3 times"
+          confidence="High (0.90+)"
+          color="green"
+        />
+        <Category
+          name="Suspected"
+          percentage={10}
+          description="Detected but intermittent reproduction"
+          confidence="Medium (0.60-0.89)"
+          color="amber"
+        />
+        <Category
+          name="Blocked"
+          percentage={5}
+          description="Could not verify (auth required, timeout)"
+          confidence="Low (<0.60)"
+          color="red"
+        />
+      </VerificationCategories>
+    </VerificationExplainer>
+  </Section>
+
+  ====================
+  PAGE 6: DOCUMENTATION (/docs)
+
+  // Using MDX for documentation pages
+  // Structure in /docs directory:
+
+  docs/
+  ├── index.mdx                    # Docs home
+  ├── getting-started/
+  │   ├── installation.mdx
+  │   ├── quickstart.mdx           # 5-minute guide
+  │   ├── first-scan.mdx
+  │   └── understanding-results.mdx
+  ├── concepts/
+  │   ├── targets.mdx
+  │   ├── policies.mdx
+  │   ├── plans.mdx
+  │   ├── findings.mdx
+  │   ├── evidence.mdx
+  │   └── confidence.mdx
+  ├── plugins/
+  │   ├── overview.mdx
+  │   ├── plugin-packs.mdx
+  │   ├── lighthouse.mdx
+  │   ├── axe.mdx
+  │   ├── zap.mdx
+  │   ├── k6.mdx
+  │   └── writing-plugins.mdx      # Plugin authoring guide
+  ├── governance/
+  │   ├── authorization.mdx
+  │   ├── scope-control.mdx
+  │   ├── rate-limits.mdx
+  │   ├── attack-mode.mdx
+  │   └── audit-logs.mdx
+  ├── ci-cd/
+  │   ├── github-actions.mdx
+  │   ├── gitlab-ci.mdx
+  │   ├── exit-codes.mdx
+  │   ├── quality-gates.mdx
+  │   └── sarif-integration.mdx
+  ├── extending/
+  │   ├── plugin-sdk.mdx
+  │   ├── custom-normalizers.mdx
+  │   ├── storage-backends.mdx
+  │   └── notification-channels.mdx
+  ├── api-reference/
+  │   ├── cli.mdx
+  │   ├── rest-api.mdx
+  │   └── schemas.mdx
+  └── faq.mdx
+
+  // Docs home page
+  <DocsHome>
+    <DocsSection title="Getting Started" icon={<Rocket />}>
+      <DocLink href="/docs/getting-started/quickstart">
+        Quickstart (5 minutes)
+      </DocLink>
+      <DocLink href="/docs/getting-started/first-scan">
+        Your First Scan
+      </DocLink>
+    </DocsSection>
+
+    <DocsSection title="By Role" icon={<Users />}>
+      <RoleCard
+        role="Developer"
+        description="Run scans locally, understand findings"
+        links={[
+          '/docs/getting-started/quickstart',
+          '/docs/concepts/findings',
+          '/docs/ci-cd/exit-codes'
+        ]}
+      />
+      <RoleCard
+        role="Security Engineer"
+        description="Configure security scans, review findings"
+        links={[
+          '/docs/plugins/zap',
+          '/docs/governance/attack-mode',
+          '/docs/governance/audit-logs'
+        ]}
+      />
+      <RoleCard
+        role="DevOps Engineer"
+        description="CI/CD integration, quality gates"
+        links={[
+          '/docs/ci-cd/github-actions',
+          '/docs/ci-cd/quality-gates',
+          '/docs/ci-cd/exit-codes'
+        ]}
+      />
+      <RoleCard
+        role="Plugin Author"
+        description="Extend TestUniverse with new tools"
+        links={[
+          '/docs/plugins/writing-plugins',
+          '/docs/extending/plugin-sdk',
+          '/docs/api-reference/schemas'
+        ]}
+      />
+    </DocsSection>
+  </DocsHome>
+
+  // Example: quickstart.mdx
+  ---
+  title: Quickstart
+  description: Get your first scan running in 5 minutes
+  ---
+
+  # Quickstart
+
+  Get TestUniverse running and scan your first target in 5 minutes.
+
+  ## Prerequisites
+
+  - Docker installed and running
+  - Python 3.10+ (or use Docker-only mode)
+
+  ## Installation
+
+  <Tabs>
+  <Tab title="pip">
+  ```bash
+  pip install aiciv
+  Your First Scan
+
+  # Scan a public website
+  aiciv run https://example.com
+
+  # Output:
+  # ✓ Recon complete (12 routes)
+  # ✓ Lighthouse: 2 findings
+  # ✓ Security Headers: 1 finding
+  # ✓ Report: ./reports/run_abc123/report.html
+
+  Understanding the Output
+
+  Next Steps
+
+  - /docs/concepts/policies for authorized scanning
+  - /docs/ci-cd/github-actions integration
+  - /docs/plugins/overview available
+
+  // Example: faq.mdx
+
+  title: FAQ
+  description: Frequently asked questions about TestUniverse
+
+  Frequently Asked Questions
+
+  suppressions:
+    - plugin: zap
+      rule_id: "10015"
+      url_pattern: "/api/health"
+      reason: "Health endpoint intentionally exposes version"
+      expires: "2024-06-01"
+      created_by: "security-team"
+
+  All suppressions require a reason and have an expiry date.
+
+
+  1. Authorization proof required in policy
+  2. Scope allowlist limits what can be scanned
+  3. Audit trail records all scan activity
+
+  Never scan systems you don't own or have explicit permission to test.
+
+
+  target:
+    auth:
+      type: session
+      credentials_ref: "vault://secrets/staging-creds"
+
+  Actual credentials never stored in config files.
+
+
+  Check aiciv doctor for performance suggestions.
+
+
+  A finding with 0.90+ confidence has been verified deterministically.
+
+
+
+  ====================
+  PAGE 7: GITHUB & OPEN SOURCE (/open-source)
+  ====================
+
+  ```jsx
+  <PageHeader
+    title="Open Source"
+    subtitle="TestUniverse is open source. Contribute, extend, and build with us."
+  />
+
+  <Section title="Repositories">
+    <RepoGrid>
+      <RepoCard
+        name="AI-Civilization"
+        description="Main monorepo: kernel, plugins, CLI, API"
+        url="https://github.com/sreejagatab/AI-Civilization"
+        branch="AI-Civ-TestUniverse"
+        stars={null}
+        language="Python"
+        topics={['testing', 'ai', 'security', 'automation']}
+      />
+      <RepoCard
+        name="testuniverse-plugins"
+        description="Community plugins and adapters"
+        url="https://github.com/..."
+        language="Python"
+        topics={['plugins', 'integrations']}
+        status="coming-soon"
+      />
+      <RepoCard
+        name="testuniverse-demos"
+        description="Demo targets and E2E test suite"
+        url="https://github.com/..."
+        language="Docker"
+        topics={['demos', 'testing']}
+        status="coming-soon"
+      />
+    </RepoGrid>
+  </Section>
+
+  <Section title="Repository Structure">
+    <DirectoryTree>
+      {`
+  AI-Civilization/
+  ├── kernel/                 # Core framework
+  │   ├── models/            # Data models (Target, Policy, Plan, Finding)
+  │   ├── plugin_sdk/        # Plugin interface & validators
+  │   ├── registry/          # Plugin discovery & packs
+  │   ├── engine/            # DAG execution engine
+  │   ├── evidence/          # Artifact storage
+  │   ├── triage/            # Dedupe, scoring, flake control
+  │   ├── reports/           # Report generation
+  │   ├── cli/               # Command-line interface
+  │   ├── integrations/      # CI/CD (GitHub, GitLab)
+  │   └── agents/            # Governor, Planner, Sentinel, etc.
+  ├── plugins/               # Built-in plugins
+  │   ├── recon/            # Reconnaissance
+  │   ├── lighthouse/       # Performance & SEO
+  │   ├── axe/              # Accessibility
+  │   ├── zap/              # Security (DAST)
+  │   ├── security/         # Headers, secrets, deps
+  │   ├── api/              # Newman, OpenAPI, GraphQL
+  │   └── k6/               # Load testing
+  ├── schemas/              # JSON schemas
+  ├── tests/                # Test suite
+  ├── docs/                 # Documentation source
+  └── k8s/                  # Kubernetes manifests
+      `}
+    </DirectoryTree>
+  </Section>
+
+  <Section title="Contributing">
+    <ContributingGuide>
+      <Step number={1} title="Fork & Clone">
+        ```bash
+        git clone https://github.com/YOUR-USERNAME/AI-Civilization.git
+        cd AI-Civilization
+        git checkout AI-Civ-TestUniverse
+        ```
+      </Step>
+      <Step number={2} title="Set Up Development Environment">
+        ```bash
+        python -m venv venv
+        source venv/bin/activate
+        pip install -e ".[dev]"
+        ```
+      </Step>
+      <Step number={3} title="Run Tests">
+        ```bash
+        make test
+        make lint
+        ```
+      </Step>
+      <Step number={4} title="Create a Branch">
+        ```bash
+        git checkout -b feature/your-feature
+        ```
+      </Step>
+      <Step number={5} title="Submit PR">
+        - Ensure tests pass
+        - Add tests for new functionality
+        - Update documentation
+        - Follow commit conventions
+      </Step>
+    </ContributingGuide>
+
+    <ContributionAreas>
+      <Area
+        title="New Plugins"
+        description="Add adapters for new testing tools"
+        difficulty="Medium"
+        link="/docs/plugins/writing-plugins"
+      />
+      <Area
+        title="Bug Fixes"
+        description="Help squash bugs and improve stability"
+        difficulty="Easy"
+        link="https://github.com/.../issues?q=is:issue+is:open+label:bug"
+      />
+      <Area
+        title="Documentation"
+        description="Improve docs, add examples, fix typos"
+        difficulty="Easy"
+        link="/docs"
+      />
+      <Area
+        title="Core Features"
+        description="Work on kernel, agents, or engine"
+        difficulty="Hard"
+        link="https://github.com/.../issues?q=is:issue+is:open+label:core"
+      />
+    </ContributionAreas>
+  </Section>
+
+  <Section title="Plugin Authoring">
+    <p className="lead">
+      "Want to add support for your favorite testing tool?
+       Here's how to write a plugin."
+    </p>
+
+    <PluginTemplate>
+      ```python
+      from kernel.plugin_sdk import PluginBase, PluginMeta, PluginCapabilities
+      from kernel.models import Finding, TargetType, TestFamily, Severity
+
+      class MyToolPlugin(PluginBase):
+          """Adapter for MyTool testing framework."""
+
+          def meta(self) -> PluginMeta:
+              return PluginMeta(
+                  id="plugin.mytool",
+                  name="MyTool",
+                  version="1.0.0",
+                  author="Your Name",
+                  tool_name="mytool",
+                  tool_version=">=2.0"
+              )
+
+          def capabilities(self) -> PluginCapabilities:
+              return PluginCapabilities(
+                  target_types=[TargetType.WEB],
+                  families=[TestFamily.SECURITY],
+                  evidence_types=["json", "html"]
+              )
+
+          def configure(self, target, policy, plan) -> ExecutionSpec:
+              return ExecutionSpec(
+                  image="mytool/mytool:latest",
+                  command=["mytool", "scan", target.url],
+                  timeout_seconds=300,
+                  resource_limits=ResourceLimits(memory_mb=512)
+              )
+
+          def normalize(self, result, artifacts) -> List[Finding]:
+              findings = []
+              for issue in result.output["issues"]:
+                  findings.append(Finding(
+                      title=issue["title"],
+                      severity=self._map_severity(issue["severity"]),
+                      family=TestFamily.SECURITY,
+                      # ... map all fields
+                  ))
+              return findings
+      ```
+    </PluginTemplate>
+
+    <PluginChecklist>
+      <ChecklistItem>✓ Implement all 8 required methods</ChecklistItem>
+      <ChecklistItem>✓ Create plugin.yaml manifest</ChecklistItem>
+      <ChecklistItem>✓ Add unit tests with mock output</ChecklistItem>
+      <ChecklistItem>✓ Document in plugin README</ChecklistItem>
+      <ChecklistItem>✓ Submit PR with example output</ChecklistItem>
+    </PluginChecklist>
+  </Section>
+
+  <Section title="License">
+    <LicenseInfo>
+      <p>
+        TestUniverse is released under the **MIT License**.
+      </p>
+      <p>
+        You are free to:
+      </p>
+      <ul>
+        <li>Use commercially</li>
+        <li>Modify</li>
+        <li>Distribute</li>
+        <li>Use privately</li>
+      </ul>
+      <p>
+        With the condition that you include the original copyright
+        and license notice in any copy of the software.
+      </p>
+      <Button href="https://github.com/.../blob/main/LICENSE">
+        View Full License
+      </Button>
+    </LicenseInfo>
+  </Section>
+
+  ====================
+  PAGE 8: ROADMAP & VISION (/roadmap)
+
+  <PageHeader
+    title="Roadmap & Vision"
+    subtitle="Where we are, where we're going, and what we'll never do"
+  />
+
+  <Section title="What's Done">
+    <RoadmapSection status="done">
+      <RoadmapItem title="Constitutional AI Framework">
+        10 agents with clear boundaries and governance
+      </RoadmapItem>
+      <RoadmapItem title="Plugin System">
+        Sandboxed execution, universal schema, 7 built-in plugins
+      </RoadmapItem>
+      <RoadmapItem title="Web Testing">
+        Playwright, Lighthouse, Axe, ZAP, Security Headers
+      </RoadmapItem>
+      <RoadmapItem title="API Testing">
+        Newman, OpenAPI validator, GraphQL tester
+      </RoadmapItem>
+      <RoadmapItem title="Performance Testing">
+        Lighthouse CWV, k6 load testing
+      </RoadmapItem>
+      <RoadmapItem title="CI/CD Integration">
+        GitHub Actions, GitLab CI, quality gates, SARIF
+      </RoadmapItem>
+      <RoadmapItem title="Evidence System">
+        Artifact storage, evidence bundles, retention policies
+      </RoadmapItem>
+      <RoadmapItem title="Triage System">
+        Deduplication, severity scoring, confidence adjustment, flake detection
+      </RoadmapItem>
+      <RoadmapItem title="Report Generation">
+        HTML, JSON, JUnit, SARIF, Markdown, PR comments
+      </RoadmapItem>
+    </RoadmapSection>
+  </Section>
+
+  <Section title="What's Next">
+    <RoadmapSection status="in-progress">
+      <RoadmapItem
+        title="E2E Demo Suite"
+        description="Public, reproducible demos proving the system works"
+        eta="Q1 2024"
+      >
+        - 5 demo targets (vulnerable, marketing, API, GraphQL, auth)
+        - Golden baseline regression tests
+        - CI running nightly
+      </RoadmapItem>
+      <RoadmapItem
+        title="CLI Polish"
+        description="Product-ready command-line experience"
+        eta="Q1 2024"
+      >
+        - `aiciv init` wizard
+        - Progress bars and ETA
+        - `aiciv doctor` diagnostics
+      </RoadmapItem>
+    </RoadmapSection>
+
+    <RoadmapSection status="planned">
+      <RoadmapItem
+        title="Desktop & CLI Testing"
+        description="Test desktop apps and CLI tools"
+        eta="Q2 2024"
+      >
+        - CLI smoke runner
+        - WinAppDriver integration
+        - Electron app testing
+      </RoadmapItem>
+      <RoadmapItem
+        title="Mobile Testing"
+        description="Android and iOS testing"
+        eta="Q2 2024"
+      >
+        - Appium adapter
+        - Device farm integration (BrowserStack, Sauce Labs)
+        - Mobile performance and accessibility
+      </RoadmapItem>
+      <RoadmapItem
+        title="Infrastructure Testing"
+        description="IaC, containers, and cloud security"
+        eta="Q3 2024"
+      >
+        - Trivy (containers)
+        - Checkov (IaC)
+        - kube-bench (Kubernetes)
+        - Cloud security posture
+      </RoadmapItem>
+      <RoadmapItem
+        title="Observability Testing"
+        description="SLO evaluation and reliability"
+        eta="Q3 2024"
+      >
+        - Synthetic monitoring
+        - SLO burn rate evaluation
+        - Log anomaly detection
+        - Chaos-lite (heavily guarded)
+      </RoadmapItem>
+    </RoadmapSection>
+  </Section>
+
+  <Section title="What We'll Never Automate">
+    <NeverAutomateSection>
+      <p className="lead">
+        "Some things shouldn't be automated. This is a trust signal."
+      </p>
+
+      <NeverItem title="Unauthorized Scanning">
+        We will never scan systems without explicit authorization.
+        The Governor enforces this with veto power.
+      </NeverItem>
+      <NeverItem title="Destructive Actions Without Approval">
+        Active security testing (fuzzing, injection attempts)
+        always requires 3-step approval process.
+      </NeverItem>
+      <NeverItem title="Storing Actual Secrets">
+        Secrets are ALWAYS redacted. We detect them, we don't store them.
+        Evidence shows "[REDACTED]", never the actual value.
+      </NeverItem>
+      <NeverItem title="Bypassing Rate Limits">
+        Rate limits are enforced, not suggested.
+        We respect target systems and their capacity.
+      </NeverItem>
+      <NeverItem title="Silent Failures">
+        Every action is logged. Every decision is auditable.
+        If something fails, you'll know why.
+      </NeverItem>
+      <NeverItem title="Magic AI Decisions">
+        We orchestrate tools, not replace them.
+        Every finding comes from a real tool with real evidence.
+        No hallucinated vulnerabilities.
+      </NeverItem>
+    </NeverAutomateSection>
+  </Section>
+
+  <Section title="Our Philosophy">
+    <Philosophy>
+      <PhilosophyStatement>
+        <Quote>
+          "Coverage is a lie. Confidence is the product."
+        </Quote>
+        <p>
+          100% code coverage means nothing if you can't reproduce a single finding.
+          We measure success by confidence: can you trust this result?
+        </p>
+      </PhilosophyStatement>
+
+      <PhilosophyStatement>
+        <Quote>
+          "Governance is not optional."
+        </Quote>
+        <p>
+          In a world of autonomous AI, constraints aren't limitations—they're features.
+          The Governor's veto power isn't a bug, it's the whole point.
+        </p>
+      </PhilosophyStatement>
+
+      <PhilosophyStatement>
+        <Quote>
+          "Evidence for every claim."
+        </Quote>
+        <p>
+          No finding without proof. Screenshots, HAR files, reproduction steps.
+          If you can't reproduce it, it didn't happen.
+        </p>
+      </PhilosophyStatement>
+
+      <PhilosophyStatement>
+        <Quote>
+          "Orchestrate, don't reinvent."
+        </Quote>
+        <p>
+          Lighthouse, ZAP, Axe, k6—these tools are excellent.
+          We make them work together, not replace them.
+        </p>
+      </PhilosophyStatement>
+    </Philosophy>
+  </Section>
+
+  <CTASection>
+    <h2>"Ready to test with confidence?"</h2>
+    <ButtonGroup>
+      <Button href="/docs/getting-started/quickstart" variant="primary">
+        Get Started
+      </Button>
+      <Button href="https://github.com/sreejagatab/AI-Civilization" variant="outline">
+        <GitHubIcon /> View on GitHub
+      </Button>
+    </ButtonGroup>
+  </CTASection>
+
+  ====================
+  GLOBAL COMPONENTS
+
+  // components/layout/Header.tsx
+  <Header>
+    <Logo />
+    <Nav>
+      <NavLink href="/">Home</NavLink>
+      <NavLink href="/how-it-works">How It Works</NavLink>
+      <NavLink href="/architecture">Architecture</NavLink>
+      <NavLink href="/coverage">Coverage</NavLink>
+      <NavLink href="/results">Results</NavLink>
+      <NavLink href="/docs">Docs</NavLink>
+      <NavLink href="/open-source">Open Source</NavLink>
+      <NavLink href="/roadmap">Roadmap</NavLink>
+    </Nav>
+    <HeaderActions>
+      <ThemeToggle />
+      <Button href="https://github.com/..." variant="ghost">
+        <GitHubIcon />
+      </Button>
+      <Button href="/docs/getting-started/quickstart" variant="primary">
+        Get Started
+      </Button>
+    </HeaderActions>
+  </Header>
+
+  // components/layout/Footer.tsx
+  <Footer>
+    <FooterSection title="Product">
+      <FooterLink href="/how-it-works">How It Works</FooterLink>
+      <FooterLink href="/architecture">Architecture</FooterLink>
+      <FooterLink href="/coverage">Coverage</FooterLink>
+      <FooterLink href="/results">Results</FooterLink>
+    </FooterSection>
+    <FooterSection title="Developers">
+      <FooterLink href="/docs">Documentation</FooterLink>
+      <FooterLink href="/docs/plugins/writing-plugins">Write a Plugin</FooterLink>
+      <FooterLink href="/docs/api-reference/cli">CLI Reference</FooterLink>
+      <FooterLink href="/docs/api-reference/schemas">Schemas</FooterLink>
+    </FooterSection>
+    <FooterSection title="Community">
+      <FooterLink href="https://github.com/...">GitHub</FooterLink>
+      <FooterLink href="https://github.com/.../issues">Issues</FooterLink>
+      <FooterLink href="https://github.com/.../discussions">Discussions</FooterLink>
+      <FooterLink href="/open-source">Contributing</FooterLink>
+    </FooterSection>
+    <FooterSection title="Legal">
+      <FooterLink href="/privacy">Privacy</FooterLink>
+      <FooterLink href="/terms">Terms</FooterLink>
+      <FooterLink href="https://github.com/.../blob/main/LICENSE">License</FooterLink>
+    </FooterSection>
+    <FooterBottom>
+      <p>© 2024 AI-Civ TestUniverse. MIT License.</p>
+      <p>Built with the AI Civilization constitutional framework.</p>
+    </FooterBottom>
+  </Footer>
+
+  // components/ui/Terminal.tsx - Animated terminal
+  // components/ui/CodeBlock.tsx - Syntax highlighted code
+  // components/ui/Callout.tsx - Info/warning/error callouts
+  // components/ui/Tabs.tsx - Tab interface
+  // components/ui/Button.tsx - Primary/secondary/ghost buttons
+  // components/ui/Card.tsx - Content cards
+  // components/ui/Badge.tsx - Status badges
+  // components/ui/Tooltip.tsx - Hover tooltips
+  // components/ui/Modal.tsx - Modal dialogs
+  // components/ui/Table.tsx - Data tables
+
+  ====================
+  BUILD & DEPLOYMENT
+
+  Project Structure:
+  website/
+  ├── app/
+  │   ├── layout.tsx              # Root layout
+  │   ├── page.tsx                # Home page
+  │   ├── how-it-works/page.tsx
+  │   ├── architecture/page.tsx
+  │   ├── coverage/page.tsx
+  │   ├── results/page.tsx
+  │   ├── docs/[[...slug]]/page.tsx
+  │   ├── open-source/page.tsx
+  │   └── roadmap/page.tsx
+  ├── components/
+  │   ├── layout/
+  │   ├── ui/
+  │   ├── home/
+  │   ├── how-it-works/
+  │   ├── architecture/
+  │   ├── coverage/
+  │   ├── results/
+  │   └── docs/
+  ├── content/
+  │   └── docs/                   # MDX documentation files
+  ├── public/
+  │   ├── images/
+  │   │   ├── results/           # Report screenshots
+  │   │   ├── diagrams/          # Architecture diagrams
+  │   │   └── logos/             # Plugin logos
+  │   ├── samples/               # Downloadable sample reports
+  │   └── schemas/               # Downloadable schemas
+  ├── styles/
+  │   └── globals.css
+  ├── lib/
+  │   ├── mdx.ts                 # MDX processing
+  │   └── mermaid.ts             # Mermaid rendering
+  ├── next.config.js
+  ├── tailwind.config.js
+  ├── tsconfig.json
+  └── package.json
+
+  Commands:
+  npm run dev      # Development server
+  npm run build    # Production build (static export)
+  npm run export   # Export to ./out for deployment
+
+  Deployment:
+  - GitHub Pages: Push to gh-pages branch
+  - Vercel: Connect repo, auto-deploy on push
+  - Netlify: Connect repo, auto-deploy on push
+
+  SEO:
+  - Each page has unique title and meta description
+  - Open Graph tags for social sharing
+  - Structured data for search engines
+  - Sitemap generated at build time
+
+  Definition of Done:
+  - All 8 pages fully implemented with all sections
+  - Dark mode default with toggle
+  - Mobile responsive (all breakpoints)
+  - Lighthouse score > 90 all categories
+  - All diagrams render correctly
+  - Code blocks have syntax highlighting
+  - Interactive terminal animations work
+  - Documentation search works
+  - All links work (no 404s)
+  - Static export works for GitHub Pages
+  - Load time < 3s on 3G connection
+
+  ---
